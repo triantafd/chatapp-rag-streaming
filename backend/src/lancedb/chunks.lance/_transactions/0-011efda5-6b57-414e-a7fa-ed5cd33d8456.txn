@@ -1,0 +1,5 @@
+$011efda5-6b57-414e-a7fa-ed5cd33d8456²²#key ÿÿÿÿÿÿÿÿÿ*string8Zdefault,
+documentId ÿÿÿÿÿÿÿÿÿ*string8Zdefault+
+pageNumber ÿÿÿÿÿÿÿÿÿ*int328Zdefault&text ÿÿÿÿÿÿÿÿÿ*string8Zdefault<vector ÿÿÿÿÿÿÿÿÿ*fixed_size_list:float:15368Zdefault"'
+lance.auto_cleanup.older_than14days"!
+lance.auto_cleanup.interval20

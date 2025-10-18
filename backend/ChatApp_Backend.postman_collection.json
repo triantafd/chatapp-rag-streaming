@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "919a2a6a-4e3b-4e82-80a2-a278789d2925",
+		"name": "ChatApp Backend (LanceDB)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22342831",
+		"_collection_link": "https://frontend-wedding.postman.co/workspace/Frontend-WEdding-Workspace~0a6567ec-623b-419c-8038-339faa9ce420/collection/22342831-919a2a6a-4e3b-4e82-80a2-a278789d2925?action=share&source=collection_link&creator=22342831"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingest (default dir)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/ingest/pdf-directory",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"ingest",
+						"pdf-directory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search (q only)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?q=solar",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "solar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search (q + document filter)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?q=charger&documentId=Solar_Charger.pdf&max=5",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "charger"
+						},
+						{
+							"key": "documentId",
+							"value": "Solar_Charger.pdf"
+						},
+						{
+							"key": "max",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ask (RAG)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"question\": \"Tell me about the specifications of solar charger\",\n  \"documentId\": \"Solar_Charger.pdf\",\n  \"k\": 5\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/chat",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"chat"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:4000"
+		}
+	]
+}
