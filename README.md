@@ -32,7 +32,6 @@ An end-to-end Retrieval-Augmented Generation (RAG) sample that lets you ingest y
 ### Tech
 - Node 18+ / TypeScript
 - Express
-- OpenAI SDK
 - LanceDB (local vector DB)
 - pdf-parse (pagerender per-page text)
 - LangChain text splitter
