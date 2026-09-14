@@ -1,0 +1,27 @@
+{
+  "name": "chatapp-rag-mcp",
+  "version": "1.0.0",
+  "description": "MCP server exposing the ChatApp RAG backend (search, ask, list, ingest) as tools",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "chatapp-rag-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "keywords": ["mcp", "rag"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3"
+  }
+}
