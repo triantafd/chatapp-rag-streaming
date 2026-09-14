@@ -37,7 +37,6 @@ export class SemanticSearch {
       documentId: r.documentId,
       pageNumber: r.pageNumber,
       text: r.text,
-      vector: r.vector,
       score: r._distance,
     }));
   }
