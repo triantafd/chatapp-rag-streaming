@@ -13,8 +13,8 @@ router.post('/pdf-directory', async (req, res) => {
     const client = getAIClient();
     const embedder = new EmbeddingService(client, config.embeddingModel);
     const ingestor = new DataIngestor(embedder);
-    await ingestor.ingest(new PDFDirectorySource(dir));
-    res.json({ ok: true, dir });
+    const result = await ingestor.ingest(new PDFDirectorySource(dir));
+    res.json({ ok: true, dir, ...result });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }

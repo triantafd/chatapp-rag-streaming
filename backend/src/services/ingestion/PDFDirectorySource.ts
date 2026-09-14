@@ -11,8 +11,10 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 export class PDFDirectorySource implements IIngestionSource {
   constructor(private directoryPath: string) {}
 
+  // Stable id: must not embed the absolute path, or moving/copying the project
+  // makes every stored document look like it belongs to a different source.
   get sourceId(): string {
-    return `PDFDirectorySource:${this.directoryPath}`;
+    return "PDFDirectorySource";
   }
 
   static sourceFileId(p: string) {

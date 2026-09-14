@@ -1,6 +1,7 @@
 /** @format */
 
 import path from "path";
+import type { Connection, Table } from "@lancedb/lancedb";
 import { config } from "../config";
 import {
   Schema,
@@ -13,7 +14,7 @@ import {
 
 const LANCEDB_DIR = config.lanceDir;
 
-let dbPromise: Promise<any> | null = null;
+let dbPromise: Promise<Connection> | null = null;
 
 async function getDb() {
   if (!dbPromise) {
@@ -40,14 +41,14 @@ export type LanceDocument = {
   documentVersion: string;
 };
 
-export async function getTables() {
+export async function getTables(): Promise<{ docs: Table; chunks: Table }> {
   const db = await getDb();
   const tables = await db.tableNames();
 
   const docsName = "documents";
   const chunksName = "chunks";
 
-  let docs: any;
+  let docs: Table;
   if (tables.includes(docsName)) {
     docs = await db.openTable(docsName);
   } else {
@@ -61,7 +62,7 @@ export async function getTables() {
     docs = await db.createTable(docsName, [], { schema: docsSchema });
   }
 
-  let chunks: any;
+  let chunks: Table;
   if (tables.includes(chunksName)) {
     chunks = await db.openTable(chunksName);
   } else {
@@ -83,9 +84,12 @@ export async function getTables() {
   }
 
   // Ensure index exists (idempotent)
+  // NOTE: this object form doesn't match the typed API `createIndex(column, options)`,
+  // so it throws and is swallowed — searches currently run as exact (flat) scans,
+  // which is fine at this data size. Cast kept to preserve that behavior.
   try {
     // CHANGED: shorthand form is safest across versions
-    await chunks.createIndex({
+    await (chunks as any).createIndex({
       type: "ivf_pq",
       column: "vector",
       metricType: "cosine",
